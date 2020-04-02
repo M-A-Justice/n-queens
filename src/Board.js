@@ -105,15 +105,14 @@
         - if rowConlflictAt returns true, return true
         - if no conflicts found, return false
       */
-      for (let num in this.attributes) {
-        if (typeof this.attributes[num] !== 'number') {
-          let boolean = this.hasRowConflictAt(this.attributes[num]);
-          if (boolean) {
-            return true;
-          }
+      let board = this.rows();
+      for (let row in board) {
+        let boolean = this.hasRowConflictAt(board[row]);
+        if (boolean) {
+          return true;
         }
       }
-      return false; // fixme
+      return false;
     },
 
 
@@ -129,16 +128,26 @@
         - if index equals one, increment tracker
         - if tracker is greater than one, return true
       */
+      // let tracker = 0;
+      // for (let num in colIndex) {
+      //   if (typeof colIndex[num] !== 'number') {
+      //     // console.log(colIndex[num]);
+      //     if (colIndex[num][0] === 1) {
+      //       tracker++;
+      //     }
+      //     if (tracker > 1) {
+      //       return true;
+      //     }
+      //   }
+      // }
       let tracker = 0;
-      for (let num in colIndex) {
-        if (typeof colIndex[num] !== 'number') {
-          console.log(colIndex[num]);
-          if (colIndex[num][0] === 1) {
-            tracker++;
-          }
-          if (tracker > 1) {
-            return true;
-          }
+      let board = this.rows();
+      for (let i = 0; i < board.length; i++) {
+        if (tracker > 1) {
+          return true;
+        }
+        if (board[i][colIndex] === 1) {
+          tracker++;
         }
       }
       return false;
@@ -146,10 +155,14 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      /*
-
-      */
-      let boolean = this.hasColConflictAt(this.attributes);
+      let board = this.rows();
+      for (let i = 0; i < board.length; i++) {
+        let boolean = this.hasColConflictAt(i);
+        if (boolean) {
+          return true;
+        }
+      }
+      // let boolean = this.hasColConflictAt(this.attributes);
       //  console.log(this.attributes);
       //  console.log(boolean);
       return false; // fixme
