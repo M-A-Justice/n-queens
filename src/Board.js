@@ -87,8 +87,10 @@
         - increment
         - if count equals > 1 return that there is a conflict and return true
       */
-      for (let i = 0; i < rowIndex.length; i++) {
-        if (rowIndex[i] === 1) {
+      let board = this.rows();
+      let row = board[rowIndex]
+      for (let i = 0; i < row.length; i++) {
+        if (row[i] === 1) {
           count++;
         }
         if (count > 1) {
@@ -106,8 +108,8 @@
         - if no conflicts found, return false
       */
       let board = this.rows();
-      for (let row in board) {
-        let boolean = this.hasRowConflictAt(board[row]);
+      for (let i = 0; i < board.length; i++) {
+        let boolean = this.hasRowConflictAt(i);
         if (boolean) {
           return true;
         }
