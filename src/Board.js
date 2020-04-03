@@ -181,6 +181,7 @@
         }
         rowIndex++;
       }
+
       return false;
     },
 
@@ -192,7 +193,7 @@
       if (length === 0) {
         return false;
       }
-      for (let i = (-board[0].length + 2); i < board[0].length - 2; i++) {
+      for (let i = -(board[0].length - 2); i < board[0].length - 2; i++) {
         if (this.hasMajorDiagonalConflictAt(i)) {
           return true;
         }
@@ -212,7 +213,7 @@
       let boolean = false;
 
       for (let i = minorDiagonalColumnIndexAtFirstRow; i > -1; i--) {
-        if (board[rowIndex] === undefined) {
+        if (rowIndex === board.length) {
           return false;
         }
         if (board[rowIndex][i] === 1 && boolean === true) {
@@ -228,7 +229,7 @@
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
       let board = this.rows();
-      for (let i = board.length + 1; i > 0; i--) {
+      for (let i = board.length + 10; i > 0; i--) {
         if (this.hasMinorDiagonalConflictAt(i)) {
           return true;
         }
